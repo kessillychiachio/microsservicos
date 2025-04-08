@@ -4,12 +4,12 @@ from typing import List
 
 app = FastAPI()
 
-contraindicacoes = [
+contraindicacoes = {
   "gravidez": ["Alecrim", "Canela", "Cravo", "Salvia", "Manjerona", "Gengibre"],
   "epilepsia": ["Alecrim", "Eucalipto", "Hortelã-pimenta"],
   "pressao alta": ["Alecrim", "Tomilho", "Hortelã-pimenta"],
   "pressao baixa": ["Ylang Ylang", "Camomila"]
-]
+}
 
 class ConsultaContraIndicacao(BaseModel):
   perfil: List[str]
@@ -23,7 +23,7 @@ def verificar_contraindicacoes(consulta: ConsultaContraIndicacao):
     for grupo in consulta.perfil:
       lista = contraindicacoes.get(grupo.lower(), [])
       for oleo in consulta.oleos:
-        if oleo in list:
+        if oleo in lista:
           perigosos.add(oleo)
           
     return {"contraindicados": list(perigosos)}
