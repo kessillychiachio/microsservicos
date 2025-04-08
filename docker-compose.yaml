@@ -20,3 +20,12 @@ services:
     build: ./contraindicacoes
     ports:
       - "5004:5000"
+
+  cliente:
+    build: ./cliente
+    depends_on:
+      - catalogo
+      - recomendacoes
+      - misturas
+      - contraindicacoes
+
