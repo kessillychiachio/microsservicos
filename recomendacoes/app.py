@@ -8,7 +8,7 @@ sugestoes = {
   "estresse": ["Hortelã-pimenta", "Ylang Ylang", "Laranja-selvagem"]
 }
 
-@app.post("/recomendacoes")
+@app.post("/recomendar")
 def recomendar(sintomas: list[str] = Body(...)):
     resultado = set()
     for sintoma in sintomas:

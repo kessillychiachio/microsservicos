@@ -13,7 +13,7 @@ Contraindicações: verifica restrições com base no perfil do usuário, garant
 arquitetura proposta ainda poderá ser expandida no futuro com um front-end ou funcionalidades extras como histórico de uso. Essa solução explora práticas modernas de desenvolvimento distribuído e se baseia em um tema original, relevante e aplicável na vida real.
 
 ├── catalogo/ # Microsserviço 1 – Catálogo de óleos
-├── recomendacoes/ # Microsserviço 2 – Recomendações por sintomas
+├── recomendar/ # Microsserviço 2 – Recomendações por sintomas
 ├── misturas/ # Microsserviço 3 – Combinações favoritas
 ├── contraindicacoes/ # Microsserviço 4 – Verificação de contraindicações
 ├── cliente/ # Cliente (linha de comando)
