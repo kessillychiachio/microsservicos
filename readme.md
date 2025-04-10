@@ -1,20 +1,68 @@
-Este projeto consiste no desenvolvimento de um sistema distribuído, baseado em arquitetura de microsserviços conteinerizados, voltado ao gerenciamento e recomendação de óleos essenciais. A proposta busca simular uma aplicação voltada para usuários que desejam utilizar óleos essenciais de forma segura e personalizada, de acordo com seus sintomas e características pessoais (como gestação ou condições de saúde).
+Sistema de Microsserviços: Óleos Essenciais
 
-A solução contará com quatro microsserviços principais, todos implementados em Python e empacotados em contêineres Docker, sendo consumidos por uma aplicação cliente em linha de comando. Cada serviço será responsável por uma única responsabilidade, seguindo os princípios da arquitetura de microsserviços:
+Visão Geral
 
-Catálogo de Óleos Essenciais: apresenta a lista completa de óleos, com propriedades e benefícios.
+Este sistema foi desenvolvido para a disciplina de Desenvolvimento de Aplicações Orientadas a Serviços com base no paradigma de microsserviços web conteinerizados, conforme os requisitos da atividade.
 
-Recomendações Personalizadas: sugere óleos com base nos sintomas informados pelo usuário.
+Ele é composto por quatro microsserviços independentes e um cliente automático que consome todos os serviços de forma contínua, mesmo em caso de falhas.
 
-Misturas e Favoritos: permite ao usuário salvar combinações personalizadas de óleos.
+Arquitetura da Solução
 
-Contraindicações: verifica restrições com base no perfil do usuário, garantindo um uso seguro.
+Cada serviço está em um contêiner Docker isolado.
+Comunicação via HTTP entre os serviços.
+Cliente assíncrono com requests e time.sleep().
+Orquestração com docker-compose.
 
-arquitetura proposta ainda poderá ser expandida no futuro com um front-end ou funcionalidades extras como histórico de uso. Essa solução explora práticas modernas de desenvolvimento distribuído e se baseia em um tema original, relevante e aplicável na vida real.
+Microsserviços:
 
-├── catalogo/ # Microsserviço 1 – Catálogo de óleos
-├── recomendar/ # Microsserviço 2 – Recomendações por sintomas
-├── misturas/ # Microsserviço 3 – Combinações favoritas
-├── contraindicacoes/ # Microsserviço 4 – Verificação de contraindicações
-├── cliente/ # Cliente (linha de comando)
-├── docker-compose.yml # Arquivo para orquestrar os serviços
+catalogo: Lista óleos essenciais com seus benefícios
+recomendar: Sugere óleos com base em sintomas informados
+misturas: Cria e lista misturas personalizadas, impedindo combinações antagônicas
+contraindicacoes: Verifica óleos não recomendados para perfis específicos (gravidez etc)
+cliente: Consome todos os serviços automaticamente (cliente_loop.py)
+
+Como Executar:
+
+Suba os serviços com Docker Compose:
+docker compose up --build
+O cliente (cliente_loop.py) começa automaticamente a consultar todos os microsserviços e exibir os resultados no terminal.
+
+
+Fluxo de Execução do Cliente:
+
+A cada 5 segundos, o cliente realiza:
+
+Consulta ao /oleos (catálogo)
+Requisição POST para /recomendar (recomendações por sintomas)
+Criação de mistura com POST /misturas
+Listagem de misturas com GET /misturas
+Verificação de contraindicações com POST /verificar
+
+Estrutura de Pastas:
+
+microsservicos/
+├── catalogo/
+│   └── app.py
+    ├── requirements.txt
+│   └── Dockerfile
+├── recomendar/
+│   └── app.py
+    ├── requirements.txt
+│   └── Dockerfile
+├── misturas/
+│   └── app.py
+    ├── requirements.txt
+│   └── Dockerfile
+├── contraindicacoes/
+│   └── app.py
+    ├── requirements.txt
+│   └── Dockerfile
+├── contraindicacoes/
+│   └── app.py
+    ├── requirements.txt
+│   └── Dockerfile
+├── cliente/
+│   ├── cliente_loop.py
+│   ├── requirements.txt
+│   └── Dockerfile
+└── docker-compose.yaml
