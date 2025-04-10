@@ -28,4 +28,4 @@ perfil = {
   "perfil": ["gravidez", "epilepsia"],
   "oleos": ["Lavanda", "Alecrim", "Canela", "Hortelã-pimenta"]
 }
-print(tentar_requisicao("post", "http://contraindicacoes:5000/contraindicacoes", json=perfil))
+print(tentar_requisicao("post", "http://contraindicacoes:5000/verificar", json=perfil))
