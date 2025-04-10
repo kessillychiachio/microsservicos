@@ -19,13 +19,13 @@ catalogo: Lista óleos essenciais com seus benefícios
 recomendar: Sugere óleos com base em sintomas informados
 misturas: Cria e lista misturas personalizadas, impedindo combinações antagônicas
 contraindicacoes: Verifica óleos não recomendados para perfis específicos (gravidez etc)
-cliente: Consome todos os serviços automaticamente (cliente_loop.py)
+cliente: Consome todos os serviços automaticamente (main.py)
 
 Como Executar:
 
 Suba os serviços com Docker Compose:
 docker compose up --build
-O cliente (cliente_loop.py) começa automaticamente a consultar todos os microsserviços e exibir os resultados no terminal.
+O cliente (main.py) começa automaticamente a consultar todos os microsserviços e exibir os resultados no terminal.
 
 
 Fluxo de Execução do Cliente:
@@ -62,7 +62,7 @@ microsservicos/
     ├── requirements.txt
 │   └── Dockerfile
 ├── cliente/
-│   ├── cliente_loop.py
+│   ├── main.py
 │   ├── requirements.txt
 │   └── Dockerfile
 └── docker-compose.yaml

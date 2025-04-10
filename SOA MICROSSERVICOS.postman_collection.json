@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "c38fd50c-f7d4-4159-948f-dcc2d0df8cb9",
+		"name": "SOA MICROSSERVICOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40099313"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET CATALOGO",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5011/oleos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5011",
+					"path": [
+						"oleos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST RECOMENDAR",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\"ansiedade\", \"insonia\"]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5012/recomendar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5012",
+					"path": [
+						"recomendar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST MISTURAS",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Relax Total\",\n  \"oleos\": [\"Lavanda\", \"Camomila\", \"Cedro\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5013/misturas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5013",
+					"path": [
+						"misturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET MISTURAS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Relax Mix\",\n  \"oleos\": [\"Lavanda\", \"Camomila\", \"Cedro\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5013/misturas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5013",
+					"path": [
+						"misturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST CONTRAINDICACOES",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"perfil\": [\"gravidez\", \"epilepsia\"],\n  \"oleos\": [\"Lavanda\", \"Alecrim\", \"Canela\", \"Hortelã-pimenta\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5014/verificar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5014",
+					"path": [
+						"verificar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
