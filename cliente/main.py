@@ -11,7 +11,7 @@ print("Catálogo de Óleos Essenciais:")
 print(tentar_requisicao("get", "http://catalogo:5000/oleos"))
 
 print("\nRecomendação por sintomas:")
-print(tentar_requisicao("post", "http://recomendacao:5000/recomendacoes"))
+print(tentar_requisicao("post", "http://recomendacoes:5000/recomendacoes"))
 
 print("\n Criar mistura personalizada:")
 mistura = {
@@ -28,4 +28,4 @@ perfil = {
   "perfil": ["gravidez", "epilepsia"],
   "oleos": ["Lavanda", "Alecrim", "Canela", "Hortelã-pimenta"]
 }
-print(tentar_requisicao("get", "http://contraindicacoes:5000/contraindicacoes", json=perfil))
+print(tentar_requisicao("post", "http://contraindicacoes:5000/contraindicacoes", json=perfil))

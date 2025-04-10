@@ -12,9 +12,9 @@ oleos = [
 def listar_oleos():
   return oleos
 
-@app.get("/oleos/{oleo.id}")
+@app.get("/oleos/{oleo_id}")
 def detalhar_oleo(oleo_id: int):
   for oleo in oleos:
     if oleo["id"] == oleo_id:
       return oleo
-    return {"erro": "Oleo nao encontrado"}
+  return {"erro": "Oleo nao encontrado"}
