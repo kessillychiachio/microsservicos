@@ -1,29 +1,31 @@
 import requests
 
-print ("Catálogo de Óleos Essenciais:")
-res = requests.get("http://localhost:5001/oleos")
-print (res.json())
+def tentar_requisicao(metodo, url, **kwargs):
+  try:
+    res = getattr(requests, metodo) (url, **kwargs)
+    return res.json()
+  except Exception as e:
+    return f"Erro ao acessar {url}: {e}"
+  
+print("Catálogo de Óleos Essenciais:")
+print(tentar_requisicao("get", "http://catalogo:5000/oleos"))
 
-print ("Recomendação por sintomas:")
-res = requests.post("http://localhost:5002/recomendar")
-print (res.json())
+print("\nRecomendação por sintomas:")
+print(tentar_requisicao("post", "http://recomendacao:5000/recomendacoes"))
 
-print ("\n Criar mistura personalizada:")
+print("\n Criar mistura personalizada:")
 mistura = {
   "nome": "Calmante e relaxante",
   "oleos": ["Lavanda", "Camomila", "Cedro"]
-  }
-res = requests.post("http://localhost:5003/misturas", json=mistura)
-print (res.json())
+}
+print(tentar_requisicao("post", "http://misturas:5000/misturas", json=mistura))
 
-print ("Misturas salvas:")
-res = requests.get("http://localhost:5003/misturas")
-print (res.json())
+print("Misturas salvas:")
+print(tentar_requisicao("get", "http://misturas:5000/misturas"))
 
-print ("Verificar contraindicações:")
+print("Verificar contraindicações:")
 perfil = {
   "perfil": ["gravidez", "epilepsia"],
   "oleos": ["Lavanda", "Alecrim", "Canela", "Hortelã-pimenta"]
 }
-res = requests.get("http://localhost:5004/verificar", json=perfil)
-print (res.json())
+print(tentar_requisicao("get", "http://contraindicacoes:5000/contraindicacoes", json=perfil))
