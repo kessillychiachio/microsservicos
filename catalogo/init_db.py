@@ -1,18 +1,28 @@
-from app import Session, OleoModel
+from app import Base, Session, engine, OleoModel
 
-oleos_iniciais = [
-    {"nome": "Lavanda", "beneficios": "calmante;relaxante;auxilia no sono"},
-    {"nome": "Hortelã-pimenta", "beneficios": "revigorante;alivia dores de cabeça;descongestionante"},
-    {"nome": "Tea Tree", "beneficios": "antisséptico;antifúngico;cicatrizante"},
-]
+Base.metadata.create_all(bind=engine)
 
 db = Session()
 
-for oleo in oleos_iniciais:
-    existente = db.query(OleoModel).filter_by(nome=oleo["nome"]).first()
-    if not existente:
-        novo = OleoModel(**oleo)
-        db.add(novo)
+if db.query(OleoModel).count() == 0:
+    oleos = [
+        ("Lavanda", ["Reduz ansiedade", "Melhora o sono", "Alivia dores de cabeça"]),
+        ("Hortelã-Pimenta", ["Melhora concentração", "Alivia dores musculares", "Reduz enjoos"]),
+        ("Melaleuca", ["Combate acne", "Antifúngico", "Anti-inflamatório"]),
+        ("Alecrim", ["Melhora memória", "Alivia dores", "Fortalece cabelo"]),
+        ("Laranja Doce", ["Melhora humor", "Ajuda na digestão", "Promove relaxamento"]),
+        ("Eucalipto", ["Descongestionante nasal", "Alivia sintomas de gripe", "Expectorante"]),
+        ("Camomila Romana", ["Calmante", "Anti-inflamatório", "Ajuda no sono"]),
+        ("Ylang Ylang", ["Reduz estresse", "Afrodisíaco", "Equilibra emoções"]),
+    ]
 
-db.commit()
+    for nome, beneficios in oleos:
+        oleo = OleoModel(nome=nome, beneficios=";".join(beneficios))
+        db.add(oleo)
+
+    db.commit()
+    print("Banco criado e populado com dados iniciais")
+else:
+    print("Banco já estava populado, nada a fazer ")
+
 db.close()

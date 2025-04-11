@@ -1,28 +1,30 @@
+version: "3.8"
+
 services:
   catalogo:
     build: ./catalogo
     ports:
-      - "5011:5000"
+      - "5011:8000" 
 
   recomendar:
     build: ./recomendar
     ports:
-      - "5012:5000"
+      - "5012:8000" 
 
   misturas:
     build: ./misturas
     ports:
-      - "5013:5000"
+      - "5013:8000"
 
   contraindicacoes:
     build: ./contraindicacoes
     ports:
-      - "5014:5000"
+      - "5014:8000"
 
   cliente:
     build: ./cliente
     ports:
-      - "5015:5000"
+      - "5015:8000"
     depends_on:
       - catalogo
       - recomendar
