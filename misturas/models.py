@@ -14,3 +14,10 @@ class Oleo(Base):
     nome = Column(String)
     mistura_id = Column(Integer, ForeignKey("misturas.id"))
     mistura = relationship("Mistura", back_populates="oleos")
+    
+class Antagonico(Base):
+    __tablename__ = "antagonicos"
+    id = Column(Integer, primary_key=True)
+    oleo1 = Column(String, nullable=False)
+    oleo2 = Column(String, nullable=False)
+
