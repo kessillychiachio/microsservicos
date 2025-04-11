@@ -15,44 +15,46 @@ def executar_cliente():
     while True:
         print("\n--- CONSULTA DE ÓLEOS ESSENCIAIS ---")
 
-        sucesso, dados = tentar_requisicao("get", "http://catalogo:5000/oleos")
-        if sucesso:
-            print("Catálogo:", dados)
-        else:
-            print("Catálogo indisponível.")
+        sucesso, dados = tentar_requisicao("get", "http://catalogo:8000/oleos")
+        print("Catálogo:", dados if sucesso else "Indisponível.")
 
-        sintomas = ["ansiedade", "insônia"]
-        sucesso, dados = tentar_requisicao("post", "http://recomendar:5000/recomendar", json=sintomas)
-        if sucesso:
-            print("Recomendações:", dados)
-        else:
-            print("Serviço de recomendações indisponível.")
+        sintomas = {"sintomas": ["ansiedade", "insônia"]}
+        sucesso, dados = tentar_requisicao("post", "http://recomendar:8000/recomendar", json=sintomas)
+        print("Recomendações:", dados if sucesso else "Indisponível.")
+
+        nova_lista = ["Lavanda", "Bergamota", "Vetiver"]
+        sucesso, dados = tentar_requisicao("put", "http://recomendar:8000/recomendar/ansiedade", json=nova_lista)
+        print("Atualização de sugestão:", dados if sucesso else "Falha.")
+
+        sucesso, dados = tentar_requisicao("delete", "http://recomendar:8000/recomendar/insônia")
+        print("Exclusão de sugestão:", dados if sucesso else "Falha.")
 
         mistura = {
             "nome": "Relax Mix",
             "oleos": ["Lavanda", "Camomila", "Cedro"]
         }
-        sucesso, dados = tentar_requisicao("post", "http://misturas:5000/misturas", json=mistura)
-        if sucesso:
-            print("Mistura criada:", dados)
-        else:
-            print("Falha ao criar mistura.")
+        sucesso, dados = tentar_requisicao("post", "http://misturas:8000/misturas", json=mistura)
+        print("Mistura criada:", dados if sucesso else "Falha.")
 
-        sucesso, dados = tentar_requisicao("get", "http://misturas:5000/misturas")
-        if sucesso:
-            print("Misturas salvas:", dados)
-        else:
-            print("Serviço de misturas indisponível.")
+        nova_mistura = {
+            "nome": "Relax Mix",
+            "oleos": ["Lavanda", "Camomila"]
+        }
+        sucesso, dados = tentar_requisicao("put", "http://misturas:8000/misturas/Relax Mix", json=nova_mistura)
+        print("Mistura atualizada:", dados if sucesso else "Falha.")
+
+        sucesso, dados = tentar_requisicao("get", "http://misturas:8000/misturas")
+        print("Misturas salvas:", dados if sucesso else "Indisponível.")
+
+        sucesso, dados = tentar_requisicao("delete", "http://misturas:8000/misturas/Relax Mix")
+        print("Mistura deletada:", dados if sucesso else "Falha.")
 
         perfil = {
             "perfil": ["gravidez", "epilepsia"],
             "oleos": ["Lavanda", "Alecrim", "Canela", "Hortelã-pimenta"]
         }
-        sucesso, dados = tentar_requisicao("post", "http://contraindicacoes:5000/verificar", json=perfil)
-        if sucesso:
-            print("Contraindicações:", dados)
-        else:
-            print("Serviço de contraindicações indisponível.")
+        sucesso, dados = tentar_requisicao("post", "http://contraindicacoes:8000/contraindicacoes", json=perfil)
+        print("Contraindicações:", dados if sucesso else "Indisponível.")
 
         time.sleep(5)
 

@@ -23,8 +23,6 @@ services:
 
   cliente:
     build: ./cliente
-    ports:
-      - "${PORT_CLIENTE}:8000"
     depends_on:
       - catalogo
       - recomendar
