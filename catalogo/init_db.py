@@ -23,6 +23,6 @@ if db.query(OleoModel).count() == 0:
     db.commit()
     print("Banco criado e populado com dados iniciais")
 else:
-    print("Banco já estava populado, nada a fazer ")
+    print("Banco já estava populado, nada a fazer")
 
 db.close()
