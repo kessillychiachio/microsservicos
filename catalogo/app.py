@@ -38,18 +38,18 @@ class OleoResponse(Oleo):
     class Config:
         orm_mode = True
 
-@app.get("/oleos", response_model=List[OleoResponse])
+@app.get("/oleos")
 def listar_oleos():
     with get_db() as db:
         oleos = db.query(OleoModel).all()
         return [
-            OleoResponse(
-                id=oleo.id,
-                nome=oleo.nome,
-                beneficios=oleo.beneficios.split(";")
-                for oleo in oleos
-            )
+            {
+                "id": o.id,
+                "nome": o.nome,
+                "beneficios": o.beneficios.split(";")
+            } for o in oleos
         ]
+
 @app.post("/oleos", response_model=dict)
 def criar_oleo(oleo: Oleo):
     with get_db() as db:
